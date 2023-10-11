@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/styles.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Github Events</title>
+</head>
+<body>
+    <form action="/events" method="GET">
+        <input type="text" name="owner" placeholder="Owner" required>
+        <input type="text" name="repo" placeholder="Repository" required>
+        <select name="type">
+            <!-- Add desired event types here -->
+            <option value="PushEvent">PushEvent</option>
+            <option value="PullRequestEvent">PullRequestEvent</option>
+            <option value="Other">Other</option>
+            <!-- ... -->
+        </select>
+        <input type="submit" value="Get Events">
+    </form>
+    
+    <ul>
+        <% events.forEach(event => { %>
+            <li>
+                <strong><%= event.type %></strong><br>
+                Actor: <a href="https://github.com/<%= event.actor.login %>"><%= event.actor.login %></a><br>
+                Time: <%= event.created_at %><br>
+                <!-- Additional event specific information can be added here -->
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
